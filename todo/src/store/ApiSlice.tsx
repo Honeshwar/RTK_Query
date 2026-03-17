@@ -4,14 +4,18 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 // RTK query just a configuration obj for api calls and it manage loding error internally and redux store changes
 
 const apiSlice = createApi({
+  tagTypes: ['todo'],
+  refetchOnFocus: true,
+  refetchOnReconnect: true,
   baseQuery: fetchBaseQuery({
     baseUrl: "https://jsonplaceholder.typicode.com",
   }),
   endpoints: (builder) => {
     return {
-      getAllTodos: builder.query({
+      getAllTodos: builder.query<any[], void>({
+        // keepUnusedDataFor: 50,
         query: () => "https://jsonplaceholder.typicode.com/todos", // this will override baseQuery base api endpoint configuration added or can pass '/todos'
-
+        providesTags: ['todo']
         // mostly data from BE is not in format what we want
         // transformResponse: (data)=>{
         //   return data;
@@ -22,9 +26,22 @@ const apiSlice = createApi({
         query: (id) => `/todos/${id}`,
       }),
 
+      // updateTodo: builder.mutation({
+      //   query
+      // })
+      // deleteTodo: builder.mutation({
+      //   query: (id: number) => ({
+      //     url: `/todos/${id}`,
+      //     method: 'PUT'
+      //   }),
+      //   invalidatesTags: ['todo']
+      // }),
       // }),
     };
   },
+
+  // keepUnusedDataFor: 60, // by default 60s
+
 });
 
 /**
