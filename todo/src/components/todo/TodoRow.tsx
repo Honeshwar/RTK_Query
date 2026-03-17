@@ -1,8 +1,10 @@
+import { useDeleteTodoMutation } from "../../store/deleteSlice";
 import { useLazyGetTodoQuery } from "../../store/ApiSlice";
 import type { Todo } from "./TodoList";
 
 export default function TodoRow({ todo }: { todo: Todo }) {
-  const [trigger, result, lastPromiseInfo_lastTrigger] = useLazyGetTodoQuery();
+  const [trigger, result] = useDeleteTodoMutation();
+  const [triggerGet, resultGet, lastPromiseInfo_lastTrigger] = useLazyGetTodoQuery();
   const { data, isLoading, isError, error } = result ?? {};
 
   return (
