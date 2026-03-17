@@ -17,11 +17,10 @@ const apiSlice = createApi({
         //   return data;
         // }
       }),
+      // Todo: trigger api when i want, control api call
       getTodo: builder.query({
         query: (id) => `/todos/${id}`,
       }),
-
-      // Todo: trigger api when i want
 
       // }),
     };
@@ -41,7 +40,8 @@ const apiSlice = createApi({
  */
 
 export default apiSlice;
-export const { useGetAllTodosQuery, useGetTodoQuery } = apiSlice;
+export const { useGetAllTodosQuery, useGetTodoQuery, useLazyGetTodoQuery } =
+  apiSlice;
 
 // custom
 // const apiSlice = createApi({
